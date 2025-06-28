@@ -4,50 +4,107 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rabljena Sedla</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-    <header>
-        <h1>Rabljena Sedla</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Domov</a></li>
-                <li><a href="about.html">O nas</a></li>
-                <li><a href="contact.html">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Rabljena Sedla</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Domov</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">O nas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <main>
-        <section class="hero">
-            <h2>Dobrodošli na naši strani za prodajo sedel</h2>
-            <p>Izberite med kakovostnimi novimi in rabljenimi sedli.</p>
+        <section class="py-5 text-center bg-light">
+            <div class="container">
+                <h2 class="display-5">Dobrodošli na naši strani za prodajo sedel</h2>
+                <p class="lead">Izberite med kakovostnimi novimi in rabljenimi sedli.</p>
+            </div>
         </section>
 
-        <section class="products">
-            <h2>Ponudba sedel</h2>
-            <div class="product-list">
-                <article class="product">
-                    <img src="https://via.placeholder.com/200" alt="Sedež 1">
-                    <h3>Usnjeno sedlo</h3>
-                    <p class="price">250 &euro;</p>
-                </article>
-                <article class="product">
-                    <img src="https://via.placeholder.com/200" alt="Sedež 2">
-                    <h3>Tekmovalno sedlo</h3>
-                    <p class="price">350 &euro;</p>
-                </article>
-                <article class="product">
-                    <img src="https://via.placeholder.com/200" alt="Sedež 3">
-                    <h3>Otroško sedlo</h3>
-                    <p class="price">120 &euro;</p>
-                </article>
+        <section class="py-5">
+            <div class="container">
+                <h2 class="mb-4">Ponudba sedel</h2>
+                <div class="row g-3" id="products">
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+1" class="card-img-top" alt="Sedlo 1">
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Usnjeno sedlo</h3>
+                                <p class="card-text">Kakovostno usnje za udobno jahanje.</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <strong class="price">250 &euro;</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+2" class="card-img-top" alt="Sedlo 2">
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Tekmovalno sedlo</h3>
+                                <p class="card-text">Primerno za zahtevne jezdece.</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <strong class="price">350 &euro;</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+3" class="card-img-top" alt="Sedlo 3">
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Otroško sedlo</h3>
+                                <p class="card-text">Lahko in prilagojeno mladim jezdcem.</p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <strong class="price">120 &euro;</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2024 Rabljena Sedla</p>
+    <footer class="bg-dark text-white text-center py-3 mt-4">
+        <p class="mb-0">&copy; 2024 Rabljena Sedla</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = localStorage.getItem('sedla');
+            if (!data) return;
+            const products = JSON.parse(data);
+            const container = document.getElementById('products');
+            container.innerHTML = '';
+            products.forEach(prod => {
+                const col = document.createElement('div');
+                col.className = 'col-md-4';
+                col.innerHTML = `
+                    <div class="card h-100">
+                        <img src="${prod.image}" class="card-img-top" alt="Sedlo">
+                        <div class="card-body text-center">
+                            <h3 class="card-title">${prod.title}</h3>
+                            <p class="card-text">${prod.desc}</p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <strong class="price">${prod.price} &euro;</strong>
+                        </div>
+                    </div>`;
+                container.appendChild(col);
+            });
+        });
+    </script>
 </body>
 </html>
