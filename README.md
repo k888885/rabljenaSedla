@@ -1,21 +1,13 @@
 # Rabljena Sedla
 
-Ta repozitorij vsebuje preprosto spletno trgovino z rabljenimi in novimi sedli. Stran uporablja [Bootstrap](https://getbootstrap.com/) za hitro oblikovanje elementov.
+To je preprosta statična spletna stran za prodajo sedel. V mapi `website` se nahajajo HTML datoteke skupaj s stilom. Stran je namenjena predstavitvi in osnovnemu kontaktnemu obrazcu.
 
 ## Struktura projekta
 
 ```
-website/
-  index.html       - domača stran s ponudbo sedel
-  about.html       - informacije o trgovini
-  contact.html     - kontaktni obrazec
-  assets/
-    style.css      - dodatni stili
+
+  index.html      - domača stran s ponudbo
+  about.html      - informacije o trgovini
+  contact.html    - kontaktni obrazec
+  assets/style.css - osnovni stili
 ```
-
-## Uporaba
-
-Odprite `website/index.html` v brskalniku. V datoteki `index.html` lahko
-zamenjate povezave do slik in uredite opise sedel po svoji meri.
-
-
