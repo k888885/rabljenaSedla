@@ -7,7 +7,10 @@ body {
 .price {
     font-weight: bold;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 .drop-zone {
     cursor: pointer;
     border: 2px dashed #6c757d;

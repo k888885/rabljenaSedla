@@ -78,6 +78,8 @@
     </main>
 <<<<<<< HEAD
 
+=======
+>>>>>>> main
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p class="mb-0">&copy; 2024 Rabljena Sedla</p>
     </footer>
@@ -92,6 +94,9 @@
             } catch (e) {
                 console.warn('Local storage ni na voljo', e);
             }
+=======
+            const data = localStorage.getItem('sedla');
+>>>>>>> main
             if (!data) return;
             const products = JSON.parse(data);
             const container = document.getElementById('products');
@@ -119,11 +124,21 @@
                 } else {
                     imgBlock = `<img src="${images[0]}" class="card-img-top" alt="Sedlo">`;
                 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> main
                 const col = document.createElement('div');
                 col.className = 'col-md-4';
                 col.innerHTML = `
                     <div class="card h-100">
+<<<<<<< HEAD
                         ${imgBlock}
+=======
+
+                        ${imgBlock}
+
+>>>>>>> main
                         <div class="card-body text-center">
                             <h3 class="card-title">${prod.title}</h3>
                             <p class="card-text">${prod.desc}</p>
