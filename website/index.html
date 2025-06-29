@@ -76,7 +76,6 @@
             </div>
         </section>
     </main>
-
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p class="mb-0">&copy; 2024 Rabljena Sedla</p>
     </footer>
@@ -112,11 +111,14 @@
                 } else {
                     imgBlock = `<img src="${images[0]}" class="card-img-top" alt="Sedlo">`;
                 }
+
                 const col = document.createElement('div');
                 col.className = 'col-md-4';
                 col.innerHTML = `
                     <div class="card h-100">
+
                         ${imgBlock}
+
                         <div class="card-body text-center">
                             <h3 class="card-title">${prod.title}</h3>
                             <p class="card-text">${prod.desc}</p>
