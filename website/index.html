@@ -76,7 +76,6 @@
             </div>
         </section>
     </main>
-
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p class="mb-0">&copy; 2024 Rabljena Sedla</p>
     </footer>
@@ -102,7 +101,8 @@
                 p.title = sanitize(p.title);
                 p.desc = sanitize(p.desc);
             });
-
+            if (!data) return;
+            const products = JSON.parse(data);
             const container = document.getElementById('products');
             container.innerHTML = '';
             products.forEach((prod, idx) => {
@@ -133,6 +133,7 @@
                 col.innerHTML = `
                     <div class="card h-100">
                         ${imgBlock}
+
                         <div class="card-body text-center">
                             <h3 class="card-title">${prod.title}</h3>
                             <p class="card-text">${prod.desc}</p>
