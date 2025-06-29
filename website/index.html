@@ -88,12 +88,37 @@
             const products = JSON.parse(data);
             const container = document.getElementById('products');
             container.innerHTML = '';
-            products.forEach(prod => {
+            products.forEach((prod, idx) => {
+                const images = (prod.images && prod.images.length)
+                    ? prod.images
+                    : (prod.image ? [prod.image] : ['https://via.placeholder.com/400x300.png?text=Sedlo']);
+                const id = `carousel${idx}`;
+                let imgBlock;
+                if (images.length > 1) {
+                    imgBlock = `<div id="${id}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            ${images.map((img,i)=>`<div class='carousel-item ${i===0?'active':''}'><img src='${img}' class='d-block w-100' alt='Sedlo'></div>`).join('')}
+                        </div>
+                        <button class='carousel-control-prev' type='button' data-bs-target='#${id}' data-bs-slide='prev'>
+                            <span class='carousel-control-prev-icon'></span>
+                            <span class='visually-hidden'>Previous</span>
+                        </button>
+                        <button class='carousel-control-next' type='button' data-bs-target='#${id}' data-bs-slide='next'>
+                            <span class='carousel-control-next-icon'></span>
+                            <span class='visually-hidden'>Next</span>
+                        </button>
+                    </div>`;
+                } else {
+                    imgBlock = `<img src="${images[0]}" class="card-img-top" alt="Sedlo">`;
+                }
+
                 const col = document.createElement('div');
                 col.className = 'col-md-4';
                 col.innerHTML = `
                     <div class="card h-100">
-                        <img src="${prod.image}" class="card-img-top" alt="Sedlo">
+
+                        ${imgBlock}
+
                         <div class="card-body text-center">
                             <h3 class="card-title">${prod.title}</h3>
                             <p class="card-text">${prod.desc}</p>

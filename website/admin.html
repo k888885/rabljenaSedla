@@ -48,13 +48,16 @@
 
     function createProductForm(prod = {}) {
         const div = document.createElement('div');
-        div.className = 'card mb-3 p-3';
+        div.className = 'card mb-3 p-3 product-card';
         div.innerHTML = `
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close remove-product" aria-label="Odstrani"></button>
+            </div>
             <div class="row">
                 <div class="col-md-4">
+                    <div class="image-list mb-2"></div>
                     <div class="drop-zone border border-dashed text-center p-3">
-                        <img src="${prod.image || 'https://via.placeholder.com/400x300.png?text=Sedlo'}" class="img-fluid" alt="Sedlo">
-                        <p class="mt-2">Spusti sliko tukaj</p>
+                        <p class="m-0">Spusti slike tukaj</p>
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -72,8 +75,20 @@
                     </div>
                 </div>
             </div>`;
+
+        const list = div.querySelector('.image-list');
         const dropZone = div.querySelector('.drop-zone');
-        const img = dropZone.querySelector('img');
+
+        function addImage(src) {
+            const wrap = document.createElement('div');
+            wrap.className = 'thumb me-1 mb-1';
+            wrap.innerHTML = `<img src="${src}" class="img-thumbnail"><button type="button" class="btn-close remove-image"></button>`;
+            wrap.querySelector('.remove-image').addEventListener('click', () => wrap.remove());
+            list.appendChild(wrap);
+        }
+
+        (prod.images || (prod.image ? [prod.image] : [])).forEach(addImage);
+
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
             dropZone.classList.add('bg-light');
@@ -84,13 +99,17 @@
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('bg-light');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = () => { img.src = reader.result; };
-                reader.readAsDataURL(file);
-            }
+            const files = Array.from(e.dataTransfer.files);
+            files.forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = () => addImage(reader.result);
+                    reader.readAsDataURL(file);
+                }
+            });
         });
+
+        div.querySelector('.remove-product').addEventListener('click', () => div.remove());
         return div;
     }
 
@@ -100,9 +119,10 @@
 
     document.getElementById('saveBtn').addEventListener('click', () => {
         const products = [];
-        document.querySelectorAll('#productList .card').forEach(card => {
+        document.querySelectorAll('#productList .product-card').forEach(card => {
+            const images = Array.from(card.querySelectorAll('.thumb img')).map(i => i.src);
             products.push({
-                image: card.querySelector('img').src,
+                images,
                 title: card.querySelector('.title').value,
                 desc: card.querySelector('.desc').value,
                 price: card.querySelector('.price').value

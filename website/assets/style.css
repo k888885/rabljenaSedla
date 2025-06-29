@@ -1,5 +1,4 @@
 body {
-
     background-color: #f8f9fa;
 }
 .hero {
@@ -15,4 +14,18 @@ body {
 }
 .drop-zone.bg-light {
     background-color: #f8f9fa;
+}
+
+.thumb {
+    position: relative;
+    display: inline-block;
+}
+.thumb img {
+    width: 100px;
+    height: auto;
+}
+.thumb .remove-image {
+    position: absolute;
+    top: 0;
+    right: 0;
 }
