@@ -35,47 +35,12 @@
         <section class="py-5">
             <div class="container">
                 <h2 class="mb-4">Ponudba sedel</h2>
-                <div class="row g-3" id="products">
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+1" class="card-img-top" alt="Sedlo 1">
-                            <div class="card-body text-center">
-                                <h3 class="card-title">Usnjeno sedlo</h3>
-                                <p class="card-text">Kakovostno usnje za udobno jahanje.</p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <strong class="price">250 &euro;</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+2" class="card-img-top" alt="Sedlo 2">
-                            <div class="card-body text-center">
-                                <h3 class="card-title">Tekmovalno sedlo</h3>
-                                <p class="card-text">Primerno za zahtevne jezdece.</p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <strong class="price">350 &euro;</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card h-100">
-                            <img src="https://via.placeholder.com/400x300.png?text=Sedlo+3" class="card-img-top" alt="Sedlo 3">
-                            <div class="card-body text-center">
-                                <h3 class="card-title">Otroško sedlo</h3>
-                                <p class="card-text">Lahko in prilagojeno mladim jezdcem.</p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <strong class="price">120 &euro;</strong>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <div class="row g-3" id="products"></div>
             </div>
         </section>
     </main>
+
     <footer class="bg-dark text-white text-center py-3 mt-4">
         <p class="mb-0">&copy; 2024 Rabljena Sedla</p>
     </footer>
@@ -83,14 +48,38 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            let data = null;
+            let products = [];
             try {
-                data = localStorage.getItem('sedla');
+                const data = localStorage.getItem('sedla');
+                if (data) {
+                    products = JSON.parse(data);
+                }
             } catch (e) {
                 console.warn('Local storage ni na voljo', e);
             }
-            if (!data) return;
-            const products = JSON.parse(data);
+
+            if (!products.length) {
+                products = [
+                    {
+                        title: 'Usnjeno sedlo',
+                        desc: 'Kakovostno usnje za udobno jahanje.',
+                        price: 250,
+                        images: ['https://via.placeholder.com/400x300.png?text=Sedlo+1']
+                    },
+                    {
+                        title: 'Tekmovalno sedlo',
+                        desc: 'Primerno za zahtevne jezdece.',
+                        price: 350,
+                        images: ['https://via.placeholder.com/400x300.png?text=Sedlo+2']
+                    },
+                    {
+                        title: 'Otroško sedlo',
+                        desc: 'Lahko in prilagojeno mladim jezdcem.',
+                        price: 120,
+                        images: ['https://via.placeholder.com/400x300.png?text=Sedlo+3']
+                    }
+                ];
+            }
 
             const sanitize = (txt) =>
                 typeof txt === 'string'
@@ -101,8 +90,6 @@
                 p.title = sanitize(p.title);
                 p.desc = sanitize(p.desc);
             });
-            if (!data) return;
-            const products = JSON.parse(data);
             const container = document.getElementById('products');
             container.innerHTML = '';
             products.forEach((prod, idx) => {
@@ -133,7 +120,6 @@
                 col.innerHTML = `
                     <div class="card h-100">
                         ${imgBlock}
-
                         <div class="card-body text-center">
                             <h3 class="card-title">${prod.title}</h3>
                             <p class="card-text">${prod.desc}</p>

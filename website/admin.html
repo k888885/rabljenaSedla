@@ -43,8 +43,6 @@
         } catch (e) {
             alert('Shranjevanje v brskalniku ni na voljo. Odprite stran preko strežnika.');
         }
-
-        const stored = localStorage.getItem('sedla');
         let products = stored ? JSON.parse(stored) : [];
         const list = document.getElementById('productList');
         list.innerHTML = '';
@@ -141,9 +139,6 @@
         } catch (e) {
             alert('Shranjevanje ni uspelo. Odprite stran preko strežnika.');
         }
-
-        localStorage.setItem('sedla', JSON.stringify(products));
-        alert('Shranjeno!');
     });
     </script>
 </body>

@@ -21,6 +21,8 @@ zamenjate povezave do slik in uredite opise sedel po svoji meri.
 
 Za urejanje sedel je na voljo stran `admin.html`. Dostop je zaščiten z enostavnim geslom `sedlo123`. Na strani lahko dodate ali odstranite izdelke ter vsakič naložite več slik preko povleci in spusti. Spremembe se shranijo v brskalnikov `localStorage`.
 
+> **Pomembno**
+> Podatki v `localStorage` so vezani na posamezen brskalnik in niso shranjeni v repozitoriju. Izdelki, ki jih dodate, bodo vidni le na napravi, kjer ste jih shranili.
 
 > **Opomba**
 > Lokalno shranjevanje med datotekami deluje le, če sta strani naloženi prek strežnika (npr. `python3 -m http.server`). Če jih odprete neposredno kot lokalne datoteke, brskalnik vsakemu URL-ju dodeli svoj prostor in shranjeni izdelki se na glavni strani ne bodo prikazali.
