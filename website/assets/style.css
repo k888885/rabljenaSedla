@@ -1,0 +1,32 @@
+body {
+    background-color: #f8f9fa;
+}
+.hero {
+    background-color: #efd5c2;
+}
+.price {
+    font-weight: bold;
+}
+
+.drop-zone {
+    cursor: pointer;
+    border: 2px dashed #6c757d;
+    position: relative;
+}
+.drop-zone.bg-light {
+    background-color: #f8f9fa;
+}
+
+.thumb {
+    position: relative;
+    display: inline-block;
+}
+.thumb img {
+    width: 100px;
+    height: auto;
+}
+.thumb .remove-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
