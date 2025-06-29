@@ -37,7 +37,16 @@
     });
 
     function loadProducts() {
+<<<<<<< HEAD
+        let stored = null;
+        try {
+            stored = localStorage.getItem('sedla');
+        } catch (e) {
+            alert('Shranjevanje v brskalniku ni na voljo. Odprite stran preko strežnika.');
+        }
+=======
         const stored = localStorage.getItem('sedla');
+>>>>>>> main
         let products = stored ? JSON.parse(stored) : [];
         const list = document.getElementById('productList');
         list.innerHTML = '';
@@ -128,8 +137,17 @@
                 price: card.querySelector('.price').value
             });
         });
+<<<<<<< HEAD
+        try {
+            localStorage.setItem('sedla', JSON.stringify(products));
+            alert('Shranjeno!');
+        } catch (e) {
+            alert('Shranjevanje ni uspelo. Odprite stran preko strežnika.');
+        }
+=======
         localStorage.setItem('sedla', JSON.stringify(products));
         alert('Shranjeno!');
+>>>>>>> main
     });
     </script>
 </body>
